@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -25,5 +26,20 @@ public class UserDaoImp implements UserDao {
       TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
       return query.getResultList();
    }
+
+   @Override
+   public User get(int series, String model) {
+      try {
+         return (User) sessionFactory.getCurrentSession()
+                 .createQuery("FROM User WHERE car.model = :model AND car.series = :series")
+                 .setParameter("model", model)
+                 .setParameter("series", series).getSingleResult();
+      } catch (NoResultException e) {
+         System.err.println("Машина с указанными серией и моделью не найдена");
+      }
+      return null;
+   }
+
+
 
 }
