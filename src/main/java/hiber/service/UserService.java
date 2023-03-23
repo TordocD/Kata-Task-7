@@ -8,5 +8,5 @@ public interface UserService {
     void add(User user);
     List<User> listUsers();
 
-    User get(int series, String model);
+    User getOwner(int series, String model);
 }

@@ -27,25 +27,12 @@ public class MainApp {
       userService.add(new User("User9", "Lastname9", "user9@mail.ru", new Car("car5")));
 
       List<User> usersNew = userService.listUsers();
-      for (int i = 0; i < usersNew.size(); i ++) {
-         User user = usersNew.get(i);
-         System.out.println("Id = " + user.getId());
-         System.out.println("First Name = " + user.getFirstName());
-         System.out.println("Last Name = " + user.getLastName());
-         System.out.println("Email = " + user.getEmail());
-
-         if(i >= 4) {
-            System.out.println("Car = " + user.getCar().getModel());
-            System.out.println();
-         }
+      for (User user : usersNew) {
+         System.out.println(user.toString());
       }
 
-      User twinUser = userService.get(1, "car1");
-      System.out.println("Id = " + twinUser.getId());
-      System.out.println("First Name = " + twinUser.getFirstName());
-      System.out.println("Last Name = " + twinUser.getLastName());
-      System.out.println("Email = " + twinUser.getEmail());
-      System.out.println("Car = " + twinUser.getCar().getModel());
+      User twinUser = userService.getOwner(1, "car1");
+      System.out.println(twinUser.toString());
 
       context.close();
    }
