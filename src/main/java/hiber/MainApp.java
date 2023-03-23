@@ -31,7 +31,7 @@ public class MainApp {
          System.out.println(user.toString());
       }
 
-      User twinUser = userService.getOwner(1, "car1");
+      User twinUser = userService.getByCarSeriesAndModel(1, "car1");
       System.out.println(twinUser.toString());
 
       context.close();
